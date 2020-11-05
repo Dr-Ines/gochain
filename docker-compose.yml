@@ -1,0 +1,35 @@
+version: '3.6'
+
+networks:
+        net:
+ 
+services:
+        postgres:
+                image: postgres
+                user: 1000:1000
+                volumes:
+                        - "./pgdata:/var/lib/postgresql/data"
+                networks:
+                        - net
+                restart: always
+
+        go-app:
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+                depends_on:
+                        - postgres
+                environment:
+                        - IP=0.0.0.0
+                        - PORT=8000
+                        - POSTGRES_URL=postgres
+                        - POSTGRES_PASSWORD=test
+                ports:
+                        - "8000:8000"
+                links:
+                        - "postgres"
+                volumes:
+                        - "./blockchain.html:/blockchain.html"
+ 
+                networks:
+                        - net
