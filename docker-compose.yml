@@ -9,9 +9,10 @@ services:
                 user: 1000:1000
                 volumes:
                         - "./pgdata:/var/lib/postgresql/data"
+                environment:
+                        - POSTGRES_PASSWORD=test
                 networks:
                         - net
-                restart: always
 
         go-app:
                 build:
