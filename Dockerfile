@@ -1,4 +1,4 @@
-FROM golang:alpine AS goapp
+FROM golang:alpine AS builder
 RUN apk add git
 WORKDIR /gochain
 COPY app.go blockchain.html ./
@@ -9,6 +9,8 @@ ENV IP=localhost
 
 FROM scratch
 WORKDIR /gochain
-COPY --from=goapp /gochain /gochain
+COPY --from=builder /gochain /gochain
 
 CMD ["./app"]
+
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD echo ok || exit 1
