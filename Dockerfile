@@ -1,4 +1,5 @@
-FROM golang:latest
+FROM golang:alpine
+RUN apk add git
 WORKDIR /gochain
 COPY app.go blockchain.html ./
 RUN go get -d -v github.com/lib/pq github.com/julienschmidt/httprouter

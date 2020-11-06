@@ -5,12 +5,12 @@ networks:
  
 services:
         postgres:
-                image: postgres
+                image: postgres:alpine
                 user: 1000:1000
                 volumes:
                         - "./pgdata:/var/lib/postgresql/data"
                 environment:
-                        - POSTGRES_PASSWORD=test
+                        - POSTGRES_PASSWORD=;hulu
                 networks:
                         - net
 
