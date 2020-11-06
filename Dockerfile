@@ -7,7 +7,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 EXPOSE 8000
 ENV IP=localhost
 
-FROM alpine
+FROM scratch
 WORKDIR /gochain
 COPY --from=goapp /gochain /gochain
 
